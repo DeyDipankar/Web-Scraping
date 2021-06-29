@@ -1,0 +1,10 @@
+1) Install pip
+2) pip install virtualenv
+3) virtualenv my_env --python=python3.7.3
+4) pip install scrapy
+5) pip freeze>requirments.txt
+
+----------create a title web crawler---------
+1) create a .py file and rename it 'my_crawler'
+2)change directory to project name and then run - scrapy crawl <name of the crawler defined inside the class>
+Note: for win32 error. pip install pywin32
