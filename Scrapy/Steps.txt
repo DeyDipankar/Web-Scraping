@@ -18,3 +18,11 @@ Note: for win32 error. pip install pywin32
 css selectors : response.css("span.author::text").extract() or simply (".author:text")
 xpath : response.xpath("//span[@class='author']/text()).extract()
 combination : response.css("li.next a").xpath("@href").extract()
+
+-------------item container-------------------------
+1)create scrapy field variables under the class in items.
+2)import the class in .py spider file, create the object and store data in those variables defined under the class
+in items.py
+
+-----------to save the scraped data into files--------
+scrapy crawl somespider -o filename.json/.csv etc.
