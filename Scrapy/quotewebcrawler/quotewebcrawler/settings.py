@@ -62,9 +62,10 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'quotewebcrawler.pipelines.QuotewebcrawlerPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'quotewebcrawler.pipelines.QuotewebcrawlerPipeline': 300, #here 300 is the priority. The higher priority that item
+   #will be chosen first
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
