@@ -7,10 +7,10 @@
 ----------create a title web crawler---------
 1. create a .py file and rename it 'my_crawler'
 2. change directory to project name and then run - scrapy crawl <name of the crawler defined inside the class>
-*Note*: for win32 error. pip install pywin32
+Note: for win32 error. pip install pywin32
 3. To get the text part only without the tag - response.css("title::text").extract() 
   or response.css("title::text").extract_first() or response.css("title::text")[0].extract() (to get the first element)
-  |> Instead of running the crawler itself we could run this from scrapy shell- scrapy shell "<url to scrape>"
+Note: Instead of running the crawler itself we could run this from scrapy shell- scrapy shell "<url to scrape>"
 
 *** Add SelectorGadgetChrome extension to chrome to get the css selectors***
 
