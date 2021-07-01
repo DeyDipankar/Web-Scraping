@@ -23,3 +23,9 @@ class ItemContainer(scrapy.Spider):
             
             yield items
 
+    ########################## Below codes are used when pagination is there ###########################
+        next_page = response.css("li.next a::attr(href)").get() #resturns the next page links such as /page/2/
+        print(next_page)
+        if next_page is not None:
+            yield response.follow(next_page, self.parse)
+
