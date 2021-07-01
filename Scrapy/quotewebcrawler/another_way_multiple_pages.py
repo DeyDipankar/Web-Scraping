@@ -5,9 +5,8 @@ class ItemContainer(scrapy.Spider):
     
     name = 'itemcontainer'
     start_urls = [
-        "http://quotes.toscrape.com/page/1/"
+        "http://quotes.toscrape.com/"
     ]
-    page_no = 2
 
     def parse(self,response):
 
@@ -25,9 +24,7 @@ class ItemContainer(scrapy.Spider):
             yield items
 
     ########################## Below codes are used when pagination is there ###########################
-        next_page =  'http://quotes.toscrape.com/page/' + str(self.page_no) + '/'  #resturns the next page links such as /page/2/
+        next_page = response.css("li.next a::attr(href)").get() #resturns the next page links such as /page/2/
         print(next_page)
-        if self.page_no <= 10:
+        if next_page is not None:
             yield response.follow(next_page, callback = self.parse)
-        self.page_no+=1
-
