@@ -6,24 +6,19 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-import mysql.connector
+import sqlite3
 
 class QuotewebcrawlerPipeline(object):
 
     def __init__(self):
         self.create_connection()
         self.create_table()
-        #self.dump_database()
 
     def create_connection(self):
         """
             This method will create the database connection & the cusror object
         """
-        self.conn = mysql.connector.connect(host = 'localhost',
-                                            user = 'root',
-                                            passwd = 'P@ss1234',
-                                            database = 'itemcontainer'
-                                        )
+        self.conn = sqlite3.connect("my_db.db")
         self.cursor = self.conn.cursor()
     
     def create_table(self):
@@ -44,14 +39,7 @@ class QuotewebcrawlerPipeline(object):
             This method is used to write the scraped data from item container into the database
         """
         #pass
-        self.cursor.execute(""" INSERT INTO my_table VALUES(%s,%s,%s)""",(item['quote'][0],item['author'][0],
+        self.cursor.execute(""" INSERT INTO my_table VALUES(?,?,?)""",(item['quote'][0],item['author'][0],
                                                                             item['tag'][0])
                             )
         self.conn.commit()
-        #self.dump_database()
-
-    # def dump_database(self):
-    #     self.cursor.execute("""USE itemcontainer;SELECT * from my_table INTO OUTFILE 'quotes.txt'""",
-    #                         multi = True
-    #     )
-    #     print("Data saved to output file")

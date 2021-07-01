@@ -10,7 +10,7 @@
 Note: for win32 error. pip install pywin32
 3. To get the text part only without the tag - response.css("title::text").extract() 
   or response.css("title::text").extract_first() or response.css("title::text")[0].extract() (to get the first element)
-Note: Instead of running the crawler itself we could run this from scrapy shell- scrapy shell "<url to scrape>"
+  Note: Instead of running the crawler itself we could run this from scrapy shell- scrapy shell "<url to scrape>"
 
 *** Add SelectorGadgetChrome extension to chrome to get the css selectors***
 
