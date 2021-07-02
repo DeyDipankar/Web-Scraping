@@ -20,4 +20,11 @@ In order to get access for scraping their data, we can either -
 
             simply paste it to settings.py
 
-        iii. Using proxy
+        iii. Using proxy(source - https://github.com/rejoiceinhope/scrapy-proxy-pool). pip install scrapy-proxy-pool> sttings.py add PROXY_POOL_ENABLED = True and then add midddleware
+
+            DOWNLOADER_MIDDLEWARES = {
+            # ...
+            'scrapy_proxy_pool.middlewares.ProxyPoolMiddleware': 610,
+            'scrapy_proxy_pool.middlewares.BanDetectionMiddleware': 620,
+            # ...
+}

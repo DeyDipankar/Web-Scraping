@@ -19,6 +19,8 @@ NEWSPIDER_MODULE = 'amazonspider.spiders'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
+# Need to enable when using proxy
+# PROXY_POOL_ENABLED = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -49,10 +51,19 @@ ROBOTSTXT_OBEY = True
 #    'amazonspider.middlewares.AmazonspiderSpiderMiddleware': 543,
 #}
 
+#USE IT WHEN USING SCRAPY-USER-AGENT
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
     'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
 }
+
+#USE IT WHEN USING SCRAPY-PROXY-POOL
+# DOWNLOADER_MIDDLEWARES = {
+#     # ...
+#     'scrapy_proxy_pool.middlewares.ProxyPoolMiddleware': 610,
+#     'scrapy_proxy_pool.middlewares.BanDetectionMiddleware': 620,
+#     # ...
+# }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
@@ -68,9 +79,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'amazonspider.pipelines.AmazonspiderPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'amazonspider.pipelines.AmazonspiderPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
