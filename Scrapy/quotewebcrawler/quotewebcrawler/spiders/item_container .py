@@ -1,16 +1,24 @@
 import scrapy
+from scrapy.http import FormRequest
 from ..items import QuotewebcrawlerItem
 
-class ItemContainer(scrapy.Spider):
-    
-    name = 'itemcontainer'
+class QuoteScraper(scrapy.Spider):
+    name = 'quotescraper'
     start_urls = [
-        "http://quotes.toscrape.com/page/1/"
+        "http://quotes.toscrape.com/login"
     ]
-    page_no = 2
+    #csrf_token = "fPrhmZebSpYAkDsGWxqgiIzyuOVaNRQCEjLKTnUoJHwvBdXFctlM"
 
     def parse(self,response):
+        token = response.css("form input::attr(value)").extract()
+        return FormRequest.from_response(response, formdata = {
+            "csrf_token" : token,
+            "username" : "deydipankar826",
+            "password" : "P@ss1234"},
+            callback = self.start_scraping
+        )
 
+    def start_scraping(self,response):
         items = QuotewebcrawlerItem()
         all_div_quotes = response.css("div.quote")
         for quotes in all_div_quotes:
@@ -23,11 +31,5 @@ class ItemContainer(scrapy.Spider):
             items['tag'] = tag
             
             yield items
-
-    ########################## Below codes are used when pagination is there ###########################
-        next_page =  'http://quotes.toscrape.com/page/' + str(self.page_no) + '/'  #resturns the next page links such as /page/2/
-        print(next_page)
-        if self.page_no <= 10:
-            yield response.follow(next_page, callback = self.parse)
-        self.page_no+=1
+        
 
